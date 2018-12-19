@@ -14,7 +14,7 @@
 
 using System.IO;
 using UnityEngine;
-using XStream;
+using Framework.Xml;
 
 namespace Assets.Demo2
 {
@@ -40,20 +40,9 @@ namespace Assets.Demo2
         //
         void Start()
         {
-            /*
             string tempXml = File.ReadAllText(Path.Combine(Application.dataPath, "Demo2/huiyi.xml"));
-            var tempObj = XmlSerializeUtil.Deserialize(typeof(HuiYiList), tempXml) as HuiYiList;
+            var tempObj = XmlUtil.Deserialize(typeof(HuiYiList), tempXml) as HuiYiList;
             foreach (HuiYiXml tempHyx in tempObj.Ins)
-            {
-                Debuger.Log(tempHyx.m_Name + ", " + tempHyx.m_Times + ", " + tempHyx.m_Address
-                     + ", " + tempHyx.m_Player + ", " + tempHyx.m_Event + ", " + tempHyx.m_Meaning
-                      + ", " + tempHyx.m_Info);
-            }
-            */
-
-            HuiYiList tempHyl = null;
-            XmlSerializeUtil.LoadXml<HuiYiList>(Path.Combine(Application.dataPath, "Demo2/huiyi.xml"), ref tempHyl);
-            foreach (HuiYiXml tempHyx in tempHyl.Ins)
             {
                 Debuger.Log(tempHyx.m_Name + ", " + tempHyx.m_Times + ", " + tempHyx.m_Address
                      + ", " + tempHyx.m_Player + ", " + tempHyx.m_Event + ", " + tempHyx.m_Meaning

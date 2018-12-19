@@ -1,16 +1,43 @@
-﻿using System;
+﻿
+#region 版权信息
+/*
+ * -----------------------------------------------------------
+ *  Copyright (c) KeJun All rights reserved.
+ * -----------------------------------------------------------
+ *		描述: 
+ *      创建者：陈伟超
+ *      创建时间: 2018/12/19 12:03:44
+ *  
+ */
+#endregion
+
+
+using System;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
 
-namespace XStream
+namespace Framework.Xml
 {
     /// <summary>  
-    /// <remarks>Xml序列化与反序列化</remarks>  
-    /// <creator>zhangdapeng</creator>  
+    /// <remarks>Xml常用功能</remarks>  
     /// </summary>  
-    public class XmlSerializeUtil
+    public class XmlUtil
     {
-        #region 反序列化  
+        #region Fields
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Protected & Public Methods
+ 
         /// <summary>  
         /// 反序列化  
         /// </summary>  
@@ -25,6 +52,7 @@ namespace XStream
                 return xmldes.Deserialize(sr);
             }
         }
+
         /// <summary>  
         /// 反序列化  
         /// </summary>  
@@ -36,9 +64,7 @@ namespace XStream
             XmlSerializer xmldes = new XmlSerializer(type);
             return xmldes.Deserialize(stream);
         }
-        #endregion
 
-        #region 序列化  
         /// <summary>  
         /// 序列化  
         /// </summary>  
@@ -62,33 +88,17 @@ namespace XStream
         }
 
         /// <summary>
-        /// 用于解析xml的方法
-        /// </typeparam>
-        /// <param name="path">xml文件的路径</param>
-        /// <param name="ms">用于接受xml文件解析的结果</param>
-        public static void LoadXml<T>(string path, ref T ms) where T : class
+        /// 获取xml文档根节点
+        /// </summary>
+        /// <param name="path">xml文档路径</param>
+        /// <returns></returns>
+        public static XmlNode GetDocumentElement(string path)
         {
-            try
-            {
-                //通过流根据路径去读取文件
-                using (TextReader reader = new StreamReader(path))
-                {
-                    var serializer = new XmlSerializer(typeof(T));
-                    var item = (T)serializer.Deserialize(reader);
-                    if (item != null)
-                    {
-                        ms = item;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                //用于捕捉异常避免解析过程中出现错误导致程序死掉
-                //将错误打印出来
-                Debuger.LogError(ex.Message);
-            }
-        }
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(path);
 
+            return xmlDoc.DocumentElement;
+        }
         #endregion
     }
 }
